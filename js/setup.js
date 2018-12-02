@@ -10,13 +10,12 @@ var NUMBER_WIZARD = 4;
 var ENTER_KEYCODE = 13;
 var ESC_KEYCODE = 27;
 
-var userDialog = document.querySelector('.setup');
-var similarListElement = userDialog.querySelector('.setup-similar-list');
+var setup = document.querySelector('.setup');
+var similarListElement = setup.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
-var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 var button = document.querySelector('.setup-submit');
@@ -26,11 +25,21 @@ var wizardCoat = setup.querySelector('.wizard-coat');
 var wizardEyes = setup.querySelector('.wizard-eyes');
 var fireBall = setup.querySelector('.setup-fireball-wrap');
 
+var initialPositionTop = '80px';
+var initialPositionLeft = '50%';
+
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
   }
 };
+
+// первоначальное положение окна
+var setPositionSetup = function () {
+  setup.style.top = initialPositionTop;
+  setup.style.left = initialPositionLeft;
+};
+
 // открытие окна настройки персонажа
 var openPopup = function () {
   setup.classList.remove('hidden');
@@ -51,6 +60,7 @@ setupOpen.addEventListener('keydown', function (evt) {
 var closePopup = function () {
   setup.classList.add('hidden');
   document.addEventListener('keydown', onPopupEscPress);
+  setPositionSetup();
 };
 
 setupClose.addEventListener('keydown', function (evt) {
@@ -137,4 +147,4 @@ for (i = 0; i < wizards.length; i++) {
 }
 similarListElement.appendChild(fragment);
 
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+setup.querySelector('.setup-similar').classList.remove('hidden');
