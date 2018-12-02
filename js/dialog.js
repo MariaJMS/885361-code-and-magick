@@ -1,4 +1,4 @@
-'use string';
+'use strict';
 
 var setupDialogElement = document.querySelector('.setup');
 var dialogHandler = setupDialogElement.querySelector('.upload');
@@ -39,8 +39,8 @@ dialogHandler.addEventListener('mousedown', function (evt) {
     document.removeEventListener('mouseup', onMouseUp);
 
     if (dragged) {
-      var onClickPreventDefault = function (evt) {
-        evt.preventDefault();
+      var onClickPreventDefault = function (prevEvt) {
+        prevEvt.preventDefault();
         dialogHandler.removeEventListener('click', onClickPreventDefault);
       };
       dialogHandler.addEventListener('click', onClickPreventDefault);
