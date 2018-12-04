@@ -1,13 +1,12 @@
 'use strict';
 
 (function () {
-  var setupDialogElement = document.querySelector('.setup');
-  var dialogHandler = setupDialogElement.querySelector('.upload');
+  var dialogHandler = window.setup.setup.querySelector('.upload');
 
   // ограничение
   var limits = {
-    top: document.documentElement.offsetHeight - setupDialogElement.offsetHeight,
-    right: document.documentElement.offsetWidth - setupDialogElement.offsetWidth,
+    top: document.documentElement.offsetHeight - window.setup.setup.offsetHeight,
+    right: document.documentElement.offsetWidth - window.setup.setup.offsetWidth,
     bottom: document.documentElement.offsetTop,
     left: document.documentElement.offsetLeft
   };

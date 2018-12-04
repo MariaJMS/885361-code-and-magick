@@ -2,7 +2,7 @@
 
 (function () {
   var button = document.querySelector('.setup-submit');
-  var userNameInput = window.setup.querySelector('.setup-user-name');
+  var userNameInput = window.setup.setup.querySelector('.setup-user-name');
 
   // валидация ввода имени персонажа
   userNameInput.addEventListener('input', function (evt) {

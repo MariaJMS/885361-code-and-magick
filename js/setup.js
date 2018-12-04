@@ -7,16 +7,20 @@
   var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var NUMBER_WIZARD = 4;
+  var setup = document.querySelector('.setup')
 
-  window.setup = document.querySelector('.setup');
-  var similarListElement = window.setup.querySelector('.setup-similar-list');
+  window.setup = {
+    setup: setup
+  };
+
+  var similarListElement = setup.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
       .content
       .querySelector('.setup-similar-item');
 
-  var wizardCoat = window.setup.querySelector('.wizard-coat');
-  var wizardEyes = window.setup.querySelector('.wizard-eyes');
-  var fireBall = window.setup.querySelector('.setup-fireball-wrap');
+  var wizardCoat = setup.querySelector('.wizard-coat');
+  var wizardEyes = setup.querySelector('.wizard-eyes');
+  var fireBall = setup.querySelector('.setup-fireball-wrap');
 
   // генерируем случайный элемент массива
   var getRandomItem = function (array) {
@@ -64,8 +68,7 @@
   }
   similarListElement.appendChild(fragment);
 
-  window.setup.querySelector('.setup-similar').classList.remove('hidden');
-
+  setup.querySelector('.setup-similar').classList.remove('hidden');
 
   // изменяем цвет мантии
   wizardCoat.addEventListener('click', function () {

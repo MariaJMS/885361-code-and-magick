@@ -5,12 +5,12 @@
   var initialPositionLeft = '50%';
 
   var setupOpen = document.querySelector('.setup-open');
-  var setupClose = window.setup.querySelector('.setup-close');
+  var setupClose = window.setup.setup.querySelector('.setup-close');
 
   // первоначальное положение окна
   var setPositionSetup = function () {
-    window.setup.style.top = initialPositionTop;
-    window.setup.style.left = initialPositionLeft;
+    window.setup.setup.style.top = initialPositionTop;
+    window.setup.setup.style.left = initialPositionLeft;
   };
 
   var onPopupEscPress = function (evt) {
@@ -21,7 +21,7 @@
 
   // открытие окна настройки персонажа
   var openPopup = function () {
-    window.setup.classList.remove('hidden');
+    window.setup.setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
   };
 
@@ -37,7 +37,7 @@
 
   // закрытие окна настройки персонажа
   var closePopup = function () {
-    window.setup.classList.add('hidden');
+    window.setup.setup.classList.add('hidden');
     document.addEventListener('keydown', onPopupEscPress);
     setPositionSetup();
   };
