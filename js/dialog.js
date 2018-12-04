@@ -3,6 +3,7 @@
 var setupDialogElement = document.querySelector('.setup');
 var dialogHandler = setupDialogElement.querySelector('.upload');
 
+// ограничение
 var limits = {
   top: document.documentElement.offsetTop,
   right: document.documentElement.offsetWidth - setupDialogElement.offsetWidth,
