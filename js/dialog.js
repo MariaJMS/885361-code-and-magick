@@ -55,14 +55,14 @@
       };
 
       var resultCoords = {
-        x: setupDialogElement.offsetLeft - shift.x,
-        y: setupDialogElement.offsetTop - shift.y
+        x: window.setup.setup.offsetLeft - shift.x,
+        y: window.setup.setup.offsetTop - shift.y
       };
 
       setupCoords(resultCoords);
 
-      setupDialogElement.style.top = resultCoords.y + 'px';
-      setupDialogElement.style.left = resultCoords.x + 'px';
+      window.setup.setup.style.top = resultCoords.y + 'px';
+      window.setup.setup.style.left = resultCoords.x + 'px';
 
     };
 

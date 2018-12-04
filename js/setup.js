@@ -7,7 +7,7 @@
   var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var NUMBER_WIZARD = 4;
-  var setup = document.querySelector('.setup')
+  var setup = document.querySelector('.setup');
 
   window.setup = {
     setup: setup
