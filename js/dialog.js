@@ -5,7 +5,7 @@ var dialogHandler = setupDialogElement.querySelector('.upload');
 
 // ограничение
 var limits = {
-  top:  document.documentElement.offsetHeight - setupDialogElement.offsetHeight,
+  top: document.documentElement.offsetHeight - setupDialogElement.offsetHeight,
   right: document.documentElement.offsetWidth - setupDialogElement.offsetWidth,
   bottom: document.documentElement.offsetTop,
   left: document.documentElement.offsetLeft
