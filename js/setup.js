@@ -9,10 +9,6 @@
   var NUMBER_WIZARD = 4;
   var setup = document.querySelector('.setup');
 
-  window.setup = {
-    setup: setup
-  };
-
   var similarListElement = setup.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
       .content
@@ -82,5 +78,9 @@
   fireBall.addEventListener('click', function () {
     fireBall.style.background = getRandomItem(FIREBALL_COLOR);
   });
+
+  window.setup = {
+    setup: setup
+  };
 
 })();

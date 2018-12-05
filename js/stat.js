@@ -28,7 +28,7 @@
     return maxElement;
   };
 
-  window.renderStatistics = function (ctx, names, times) {
+  var renderStatistics = function (ctx, names, times) {
     renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.3)');
     renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
@@ -53,6 +53,10 @@
       ctx.fillText(Math.round(times[i]), CLOUD_X + TEXT_GAP + (BAR_WIDTH + TEXT_GAP) * i, CLOUD_HEIGHT - GAP - TEXT_HEIGHT - BAR_HEIGHT_RESULT - TEXT_HEIGHT);
       ctx.fillText(names[i], CLOUD_X + TEXT_GAP + (BAR_WIDTH + TEXT_GAP) * i, CLOUD_BOTTOM + GAP);
     }
+  };
+
+  window.stat = {
+    renderStatistics: renderStatistics
   };
 
 })();

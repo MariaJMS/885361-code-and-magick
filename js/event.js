@@ -1,16 +1,16 @@
 'use strict';
 
 (function () {
-  var initialPositionTop = '80px';
-  var initialPositionLeft = '50%';
+  var INITIAL_POSITION_TOP = 80;
+  var INITIAL_POSITION_LEFT = 50;
 
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = window.setup.setup.querySelector('.setup-close');
 
   // первоначальное положение окна
   var setPositionSetup = function () {
-    window.setup.setup.style.top = initialPositionTop;
-    window.setup.setup.style.left = initialPositionLeft;
+    window.setup.setup.style.top = INITIAL_POSITION_TOP + 'px';
+    window.setup.setup.style.left = INITIAL_POSITION_LEFT + '%';
   };
 
   var onPopupEscPress = function (evt) {
