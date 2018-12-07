@@ -59,7 +59,6 @@
   };
 
   var onLoad = function (dataArr) {
-
     var wizards = [];
     for (var i = 0; i < NUMBER_WIZARD; i++) {
       var dataArrItem = getRandomItem(dataArr);
@@ -69,7 +68,6 @@
         eyesColor: dataArrItem.colorEyes
       };
     }
-
     var fragment = document.createDocumentFragment();
 
     for (i = 0; i < NUMBER_WIZARD; i++) {
@@ -95,9 +93,12 @@
   window.load(onLoad, onError);
 
   // закрытие формы при нажатии кнопки "Сохранить"
+  var saveForm = function () {
+    form.classList.add('hidden');
+  };
   var form = setup.querySelector('.setup-wizard-form');
   form.addEventListener('submit', function (evt) {
-    window.save(new FormData(form), onLoad, onError);
+    window.save(new FormData(form), saveForm, onError);
     evt.preventDefault();
   });
 
