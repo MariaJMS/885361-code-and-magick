@@ -2,7 +2,7 @@
 
 (function () {
 
-  window.load = function (onLoad, onError) {
+  window.load = function (data, onLoad, onError) {
 
     var URL = 'https://js.dump.academy/code-and-magick/data';
     var xhr = new XMLHttpRequest();
