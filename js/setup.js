@@ -5,9 +5,6 @@
   var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
-  var DEBOUNCE_INTERVAL = 300;
-  var URL = 'https://js.dump.academy/code-and-magick/data';
-
   var setup = document.querySelector('.setup');
   var wizardCoat = setup.querySelector('.wizard-coat');
   var wizardEyes = setup.querySelector('.wizard-eyes');
@@ -75,7 +72,7 @@
 
   var form = setup.querySelector('.setup-wizard-form');
   form.addEventListener('submit', function (evt) {
-    window.save(new FormData(form), saveForm, showError);
+    window.backend.saveData(new FormData(form), saveForm, showError);
     evt.preventDefault();
   });
 
@@ -84,25 +81,14 @@
     updateWizards();
   };
 
-  window.load(URL, successHandler, showError);
-
-  // устранение "дребезга"
-  var lastTimeout;
-  var debounce = function () {
-    if (lastTimeout) {
-      window.clearTimeout(lastTimeout);
-    }
-    lastTimeout = window.setTimeout(function () {
-      updateWizards();
-    }, DEBOUNCE_INTERVAL);
-  };
+  window.backend.loadData(successHandler, showError);
 
   // изменяем цвет мантии
   wizardCoat.addEventListener('click', function () {
     var newColor = getRandomItem(COAT_COLOR);
     wizardCoat.style.fill = newColor;
     coatColor = newColor;
-    debounce();
+    window.util.debounce();
   });
 
   // изменяем цвет глаз
@@ -110,7 +96,7 @@
     var newColor = getRandomItem(EYES_COLOR);
     wizardEyes.style.fill = newColor;
     eyesColor = newColor;
-    debounce();
+    window.util.debounce();
   });
 
   // изменяем цвет фаербола
@@ -120,7 +106,8 @@
   });
 
   window.setup = {
-    setup: setup
+    setup: setup,
+    updateWizards: updateWizards
   };
 
 })();
