@@ -4,51 +4,53 @@
   var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
   var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-  var NUMBER_WIZARD = 4;
+
   var setup = document.querySelector('.setup');
-
-  var similarListElement = setup.querySelector('.setup-similar-list');
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-      .content
-      .querySelector('.setup-similar-item');
-
   var wizardCoat = setup.querySelector('.wizard-coat');
   var wizardEyes = setup.querySelector('.wizard-eyes');
-  var fireBall = setup.querySelector('.setup-fireball-wrap');
+  var wizardFireball = setup.querySelector('.setup-fireball-wrap');
 
   // генерируем случайный элемент массива
   var getRandomItem = function (array) {
     return array [Math.floor(Math.random() * array.length)];
   };
 
-  var createWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
+  var coatColor;
+  var eyesColor;
+  var wizards = [];
 
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+  // система "отличности" одного мага от другого
+  var getRank = function (wizard) {
+    var rank = 0;
 
-    return wizardElement;
+    if (wizard.colorCoat === coatColor) {
+      rank += 2;
+    }
+    if (wizard.colorEyes === eyesColor) {
+      rank += 1;
+    }
+    return rank;
   };
 
-  var renderSimilarWizards = function (dataArr) {
-    var wizards = [];
-    for (var i = 0; i < NUMBER_WIZARD; i++) {
-      var dataArrItem = getRandomItem(dataArr);
-      wizards[i] = {
-        name: dataArrItem.name,
-        coatColor: dataArrItem.colorCoat,
-        eyesColor: dataArrItem.colorEyes
-      };
+  // сортировка, когда маги равны
+  var namesComparator = function (left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
     }
-    var fragment = document.createDocumentFragment();
+  };
 
-    for (i = 0; i < NUMBER_WIZARD; i++) {
-      fragment.appendChild(createWizard(wizards[i]));
-    }
-    similarListElement.appendChild(fragment);
-
-    setup.querySelector('.setup-similar').classList.remove('hidden');
+  var updateWizards = function () {
+    window.render.renderWizards(wizards.sort(function (left, right) {
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
   };
 
   var showError = function (errMes) {
@@ -63,33 +65,49 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.load(renderSimilarWizards, showError);
-
   // закрытие формы при нажатии кнопки "Сохранить"
   var saveForm = function () {
     form.classList.add('hidden');
   };
+
   var form = setup.querySelector('.setup-wizard-form');
   form.addEventListener('submit', function (evt) {
-    window.save(new FormData(form), saveForm, showError);
+    window.backend.saveData(new FormData(form), saveForm, showError);
     evt.preventDefault();
   });
 
+  var successHandler = function (dataArr) {
+    wizards = dataArr;
+    updateWizards();
+  };
+
+  window.backend.loadData(successHandler, showError);
+
   // изменяем цвет мантии
   wizardCoat.addEventListener('click', function () {
-    wizardCoat.style.fill = getRandomItem(COAT_COLOR);
+    var newColor = getRandomItem(COAT_COLOR);
+    wizardCoat.style.fill = newColor;
+    coatColor = newColor;
+    window.util.debounce();
   });
+
   // изменяем цвет глаз
   wizardEyes.addEventListener('click', function () {
-    wizardEyes.style.fill = getRandomItem(EYES_COLOR);
+    var newColor = getRandomItem(EYES_COLOR);
+    wizardEyes.style.fill = newColor;
+    eyesColor = newColor;
+    window.util.debounce();
   });
+
   // изменяем цвет фаербола
-  fireBall.addEventListener('click', function () {
-    fireBall.style.background = getRandomItem(FIREBALL_COLOR);
+  wizardFireball.addEventListener('click', function () {
+    var newColor = getRandomItem(FIREBALL_COLOR);
+    wizardFireball.style.background = newColor;
   });
 
   window.setup = {
-    setup: setup
+    setup: setup,
+    updateWizards: updateWizards
   };
 
 })();
